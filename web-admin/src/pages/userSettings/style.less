@@ -1,0 +1,209 @@
+@import '~antd/es/style/themes/default.less';
+
+.main {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: @menu-bg;
+
+  .leftMenu {
+    width: 224px;
+    border-right: @border-width-base @border-style-base @border-color-split;
+
+    :global {
+      .ant-menu-inline {
+        border: none;
+      }
+
+      .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .right {
+    flex: 1;
+    padding: 8px 40px;
+
+    .title {
+      margin-bottom: 12px;
+      color: @heading-color;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 28px;
+    }
+  }
+
+  :global {
+    .ant-list-split .ant-list-item:last-child {
+      border-bottom: 1px solid @border-color-split;
+    }
+
+    .ant-list-item {
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+  }
+}
+
+// mixins for clearfix
+// ------------------------
+.clearfix() {
+  zoom: 1;
+
+  &::before,
+  &::after {
+    display: table;
+    content: ' ';
+  }
+
+  &::after {
+    clear: both;
+    height: 0;
+    font-size: 0;
+    visibility: hidden;
+  }
+}
+
+.pageHeaderContent {
+  display: flex;
+
+  .avatar {
+    flex: 0 1 72px;
+
+    &>span {
+      display: block;
+      width: 72px;
+      height: 72px;
+      border-radius: 72px;
+    }
+  }
+
+  .content {
+    position: relative;
+    top: 4px;
+    flex: 1 1 auto;
+    margin-left: 24px;
+    color: @text-color-secondary;
+    line-height: 22px;
+
+    .contentTitle {
+      margin-bottom: 12px;
+      color: @heading-color;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 28px;
+    }
+  }
+}
+
+.extraContent {
+  .clearfix();
+
+  float: right;
+  white-space: nowrap;
+
+  .statItem {
+    position: relative;
+    display: inline-block;
+    padding: 0 32px;
+
+    >p:first-child {
+      margin-bottom: 4px;
+      color: @text-color-secondary;
+      font-size: @font-size-base;
+      line-height: 22px;
+    }
+
+    >p {
+      margin: 0;
+      color: @heading-color;
+      font-size: 30px;
+      line-height: 38px;
+
+      >span {
+        color: @text-color-secondary;
+        font-size: 20px;
+      }
+    }
+
+    &::after {
+      position: absolute;
+      top: 8px;
+      right: 0;
+      width: 1px;
+      height: 40px;
+      background-color: @border-color-split;
+      content: '';
+    }
+
+    &:last-child {
+      padding-right: 0;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+:global {
+  .ant-list-item-meta {
+
+    // 账号绑定图标
+    .taobao {
+      display: block;
+      color: #ff4000;
+      font-size: 48px;
+      line-height: 48px;
+      border-radius: @border-radius-base;
+    }
+
+    .dingding {
+      margin: 2px;
+      padding: 6px;
+      color: #fff;
+      font-size: 32px;
+      line-height: 32px;
+      background-color: #2eabff;
+      border-radius: @border-radius-base;
+    }
+
+    .alipay {
+      color: #2eabff;
+      font-size: 48px;
+      line-height: 48px;
+      border-radius: @border-radius-base;
+    }
+  }
+
+  // 密码强度
+  font.strong {
+    color: @success-color;
+  }
+
+  font.medium {
+    color: @warning-color;
+  }
+
+  font.weak {
+    color: @error-color;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .main {
+    flex-direction: column;
+
+    .leftMenu {
+      width: 100%;
+      border: none;
+    }
+
+    .right {
+      padding: 40px;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# 线上环境
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:      #线上数据库地址
+    username: #线上数据库账号
+    password: #线上数据库密码

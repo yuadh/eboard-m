@@ -1,0 +1,93 @@
+{
+  // 如果您是通过uni_modules形式引入uView，可以忽略此配置
+  "easycom": {
+  	"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+  },
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/dashboard/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+    {
+    	"path": "pages/room/index",
+    	"style": {
+    		"navigationBarTitleText": "会议室"
+        // "navigationStyle": "custom" 
+    	}
+    },
+    {
+    	"path": "pages/lab/index",
+    	"style": {
+    		"navigationBarTitleText": "实验室"
+    	}
+    },
+    {
+    	"path": "pages/mine/index",
+    	"style": {
+    		"navigationBarTitleText": "我的"
+    	}
+    },
+    {
+    	"path": "pages/conference/index",
+    	"style": {
+    		"navigationBarTitleText": "会议"
+    	}
+    },
+    {
+    	"path": "pages/show/index",
+    	"style": {
+    		"navigationBarTitleText": "投屏"
+    	}
+    },
+    {
+    	"path": "pages/login/index",
+    	"style": {
+        "navigationBarBackgroundColor":"#eee",
+    		"navigationBarTitleText": "登录"
+        
+    	}
+    },
+    {
+    	"path": "pages/other/index",
+    	"style": {
+    		"navigationBarTitleText": "其它"
+    	}
+    }
+  ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "EBoard电子桌牌",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#00baef",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [{ 
+      "pagePath": "pages/dashboard/index",
+      "iconPath": "static/image/tabBar/dash.png",
+      "selectedIconPath": "static/image/tabBar/dash_selected.png",
+      "text": "首页"
+    },{
+      "pagePath": "pages/room/index",
+      "iconPath": "static/image/tabBar/room.png",
+      "selectedIconPath": "static/image/tabBar/room_selected.png",
+      "text": "会议室"
+    },{
+      "pagePath": "pages/lab/index",
+      "iconPath": "static/image/tabBar/lab.png",
+      "selectedIconPath": "static/image/tabBar/lab_selected.png",
+      "text": "实验室"
+    },{
+      "pagePath": "pages/mine/index",
+      "iconPath": "static/image/tabBar/admin.png",
+      "selectedIconPath": "static/image/tabBar/admin.selected.png",
+      "text": "我的"
+    }]
+  }
+}

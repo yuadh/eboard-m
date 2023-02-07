@@ -1,0 +1,123 @@
+page {
+	font-size: 28rpx;
+	line-height: 1.5;
+	color: #2c3e50;
+	background: #fff;
+	font-family: 'PingFang-SC-Medium';
+}
+
+button {
+	color: #333;
+}
+page,
+view,
+input,
+text,
+form,
+navigator,
+rich-text,
+picker,
+scroll-view,
+cover-view,
+open-data {
+	box-sizing: border-box;
+}
+rich-text,
+open-data,
+form {
+	display: block;
+}
+cover-view {
+	line-height: 1.5;
+	white-space: normal;
+}
+
+/* float */
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.dpn {
+	display: none;
+}
+.clearfix:after {
+	content: '.';
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.cf6 {
+	color: #c7a769;
+}
+.bgf {
+	background: #fff;
+}
+.rel {
+	position: relative;
+}
+.tac {
+	text-align: center;
+}
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+	display: none;
+}
+button:after {
+	border: 0;
+}
+.flex-box {
+	display: flex;
+	.flex-item {
+		flex: 1;
+	}
+}
+
+.footer-box {
+	height: 100rpx;
+}
+/* // 单双行换行 */
+.ellipsis {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.ellipsis2 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+// 单条bar
+.line-item {
+	background: #fff;
+	padding-left: 30rpx;
+	padding-right: 65rpx;
+	color: #666;
+	line-height: 100rpx;
+	font-size: 27rpx;
+	&.arrow {
+		position: relative;
+		&:before {
+			position: absolute;
+			content: '';
+			right: 40rpx;
+			top: 50rpx;
+			width: 15rpx;
+			height: 15rpx;
+			border-top: 3rpx solid #666;
+			border-right: 3rpx solid #666;
+			transform: rotate(45deg);
+		}
+	}
+	.lab {
+		float: left;
+		line-height: 100rpx;
+		height: 100rpx;
+		color: #000;
+	}
+}
