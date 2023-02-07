@@ -16,8 +16,8 @@
 #include "srvr.h" // Server functions
 #define AIO_SERVER    "127.0.0.1"
 #define AIO_SERVERPORT   1883
-#define AIO_USERNAME   ""
-#define AIO_KEY        "121212"
+#define AIO_USERNAME   "" //用户和key可以忽略
+#define AIO_KEY        "121212" //用户和key可以忽略
 #include "Adafruit_MQTT.h"
 #include "Adafruit_MQTT_Client.h"
 #include<ArduinoJson.h>
