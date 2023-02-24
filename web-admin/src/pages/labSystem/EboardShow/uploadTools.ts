@@ -3,24 +3,24 @@ import { url } from "inspector"
 import {getVal} from './aTools'
 import {message} from 'antd'
 
-let sendURL:string
-let stInd:number
-let pxInd:number
-let rqMsg:any
-let canvas:any
-let srcImg:any
-let c = canvas
-let dispW = srcImg.width
-let dispH = srcImg.height
-let pArr = c.getContext('2d').getImageData(0, 0, dispW, dispH) 
-let nArr = new Array(dispW*dispH)
+let sendURL: string
+let stInd: number
+let pxInd: number
+let rqMsg: any
+let canvas: any
+let srcImg: any
+const c = canvas
+const dispW = srcImg.width
+const dispH = srcImg.height
+const pArr = c.getContext('2d').getImageData(0, 0, dispW, dispH) 
+const nArr = new Array(dispW*dispH)
 let index = 0
 //字符转
- function byteToStr(v:any) {
+ function byteToStr(v: any) {
   return String.fromCharCode((v & 0xf) + 97, ((v >> 4) & 0xf) + 97)
 }
 //看不懂
- function wordToStr(v:any) {
+ function wordToStr(v: any) {
   return byteToStr(v & 0xff) + byteToStr((v >> 8) & 0xff)
 }
 function u_next() {
@@ -30,7 +30,7 @@ function u_next() {
 function u_done() {
   return u_send('SHOW_', true)
 }
- function u_send(cmd:any,next:any){
+ function u_send(cmd: any,next: any){
   axios.post(
     sendURL+cmd
   ).then((res)=>{
@@ -48,13 +48,13 @@ function u_done() {
   return 
 }
 
- function u_show(a:any, k1:number, k2:number) {
-  var x = '' + (k1 + (k2 * pxInd) / a.length)
+ function u_show(a: any, k1: number, k2: number) {
+  let x = '' + (k1 + (k2 * pxInd) / a.length)
   if (x.length > 5) x = x.substring(0, 5) //取5位进度数，包括小数点
   return u_send(rqMsg + wordToStr(rqMsg.length) + 'LOAD_', pxInd >= a.length)
 }
 
- function u_data(a:any, c:number, k1:number, k2:number) {
+ function u_data(a: any, c: number, k1: number, k2: number) {
   rqMsg = ''
 
   if (c == -1) {
@@ -88,10 +88,10 @@ function u_done() {
 
 
 
-export function uploadImage(epdInd:number){
+export function uploadImage(epdInd: number){
   message.warn('错错错!!!')
-  for (var y = 0; y < dispH; y++){
-    for (var x = 0; x < dispW; x++, index++) {
+  for (let y = 0; y < dispH; y++){
+    for (let x = 0; x < dispW; x++, index++) {
       nArr[index] = getVal(pArr, index << 2)
     }
   }
