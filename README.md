@@ -58,6 +58,7 @@ README.md
 - server - 服务端源码
 - uniapp - 应用端源码
 - web-admin - 管理端源码
+- .cz-config.js - 提交规范配置，遵循Angular规范
 
 ## 快速启动
 
