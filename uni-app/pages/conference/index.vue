@@ -1,33 +1,63 @@
 <template>
   <view class="bg">
     <view class="eTop">
-      <view class="conferenceName">当前会议:{{ nowRoomDataVO.roomName ? nowRoomDataVO.roomName : '暂无会议' }}</view>
-      <view class="canUseEquipNums">可用资源数: {{ nowRoomDataVO.inRoomEquipmenCount }}/{{ nowRoomDataVO.equipmentCount }}</view>
+      <view class="conferenceName"
+        >当前会议:{{
+          nowRoomDataVO.roomName ? nowRoomDataVO.roomName : "暂无会议"
+        }}</view
+      >
+      <view class="canUseEquipNums"
+        >可用资源数: {{ nowRoomDataVO.inRoomEquipmenCount }}/{{
+          nowRoomDataVO.equipmentCount
+        }}</view
+      >
       <view class="topButs">
-        <view class="btn1" v-if="!nowRoomDataVO.flag" @click="start">开始会议</view>
+        <view class="btn1" v-if="!nowRoomDataVO.flag" @click="start"
+          >开始会议</view
+        >
         <view class="btn1 btn2" v-else @click="finish">结束会议</view>
         <view class="btn1 btn3" v-if="nowRoomDataVO.flag">批量刷新</view>
       </view>
     </view>
-    <view style="height:400rpx"></view>
+    <view style="height: 400rpx"></view>
     <view class="eBottom">
       <view class="list">
         <view class="card" v-for="(item, index) in dataList" :key="index">
           <view class="cLeft">
             <view class="equipName">{{ item.equipmentCode }}</view>
-            <view class="equipState" :style="{ color: item.equipmentStatus == 0 ? 'green' : 'red' }">
-              <view class="state" :style="{ backgroundColor: item.equipmentStatus == 0 ? 'green' : 'red' }"></view>
-              {{ item.equipmentIp ? item.equipmentIp : '暂无数据' }}
+            <view
+              class="equipState"
+              :style="{ color: item.equipmentStatus == 0 ? 'green' : 'red' }"
+            >
+              <view
+                class="state"
+                :style="{
+                  backgroundColor: item.equipmentStatus == 0 ? 'green' : 'red',
+                }"
+              ></view>
+              {{ item.equipmentIp ? item.equipmentIp : "暂无数据" }}
             </view>
             <view class="eButs">
-              <view class="btn1" @click="goto(item.equipmentIp, item.id)">修改</view>
-              <view class="btn1 btn3" @click="equipmentTest(item.equipmentIp, item.id)">
+              <view class="btn1" @click="goto(item.equipmentIp, item.id)"
+                >修改</view
+              >
+              <view
+                class="btn1 btn3"
+                @click="equipmentTest(item.equipmentIp, item.id)"
+              >
                 测试
               </view>
             </view>
           </view>
           <view class="cRight">
-            <image :src="item.equipmentScreen !== null ? item.equipmentScreen : '/static/null.png'" mode="widthFix" />
+            <image
+              :src="
+                item.equipmentScreen !== null
+                  ? item.equipmentScreen
+                  : '/static/null.png'
+              "
+              mode="widthFix"
+            />
           </view>
         </view>
       </view>
@@ -37,16 +67,22 @@
 </template>
 
 <script>
-import { apiIntoRoom, apiGetRoomNow, apiStartConference, apiFinishConference, apiGetEquipment } from '../../apis/room.js'
+import {
+  apiIntoRoom,
+  apiGetRoomNow,
+  apiStartConference,
+  apiFinishConference,
+  apiGetEquipment,
+} from "../../apis/room.js"
 export default {
   data() {
     return {
-      uid: '',
-      id: '',
-      roomName: '',
+      uid: "",
+      id: "",
+      roomName: "",
       nowRoomDataVO: {},
-      conferenceName: '',
-      dataList: []
+      conferenceName: "",
+      dataList: [],
     }
   },
   onLoad(options) {
@@ -60,14 +96,14 @@ export default {
     async conferenceInit() {
       try {
         let res1 = await apiIntoRoom({ roomId: this.id })
-        if (res1.data.code == '0') {
+        if (res1.data.code == "0") {
           this.dataList = res1.data.data
         } else {
           uni.showToast({
             title: res1.data.message,
             duration: 2000,
-            icon: 'none'
-          });
+            icon: "none",
+          })
         }
       } catch (e) {
         console.log(e)
@@ -75,15 +111,15 @@ export default {
 
       try {
         let res2 = await apiGetRoomNow({ id: this.id })
-        if (res2.data.code == '0') {
+        if (res2.data.code == "0") {
           this.nowRoomDataVO = res2.data.data
           this.conferenceName = res2.data.data.roomName
         } else {
           uni.showToast({
             title: res2.data.message,
             duration: 2000,
-            icon: 'none'
-          });
+            icon: "none",
+          })
         }
       } catch (e) {
         console.log(e)
@@ -91,79 +127,75 @@ export default {
     },
     start() {
       uni.showModal({
-        title: '开始会议',
+        title: "开始会议",
         editable: true,
-        success: async res => {
+        success: async (res) => {
           if (res.confirm) {
-
-            let startReq = {//数据结构设计有问题...
+            let startReq = {
+              //数据结构设计有问题...
               roomId: this.id,
               userId: this.uid,
               createTime: "",
               finishTime: "",
               id: 0,
               isFinish: 0,
-              conferenceName: res.content
+              conferenceName: res.content,
             }
             try {
               let res = await apiStartConference(startReq)
-              if (res.data.code == '0') {
+              if (res.data.code == "0") {
                 uni.showToast({
-                  title: '开启会议',
+                  title: "开启会议",
                   duration: 1000,
-                  icon: 'none'
-                });
+                  icon: "none",
+                })
                 this.conferenceInit()
               } else {
                 uni.showToast({
                   title: res.data.message,
                   duration: 1000,
-                  icon: 'none'
-                });
+                  icon: "none",
+                })
               }
-            } catch (e) {
-
-            }
+            } catch (e) {}
           }
-        }
+        },
       })
     },
     finish() {
       uni.showModal({
-        title: '结束会议？',
-        success: async res => {
+        title: "结束会议？",
+        success: async (res) => {
           if (res.confirm) {
             try {
               let res = await apiFinishConference(this.nowRoomDataVO.id)
 
-              if (res.data.code == '0') {
+              if (res.data.code == "0") {
                 uni.showToast({
-                  title: '结束成功～',
+                  title: "结束成功～",
                   duration: 1000,
-                  icon: 'none'
-                });
+                  icon: "none",
+                })
                 this.conferenceInit()
               } else {
                 uni.showToast({
                   title: res.data.message,
                   duration: 2000,
-                  icon: 'none'
-                });
+                  icon: "none",
+                })
               }
-            } catch (e) {
-
-            }
+            } catch (e) {}
           }
-        }
+        },
       })
     },
     async equipmentTest(ip, id) {
       if (!ip) {
         uni.showToast({
-          title: '暂无IP信息,等待连接！',
+          title: "暂无IP信息,等待连接！",
           duration: 2000,
-          icon: 'none'
-        });
+          icon: "none",
+        })
         this.conferenceInit()
         return
       }
@@ -172,66 +204,62 @@ export default {
 
         if (res.data.data.equipmentStatus == 1) {
           uni.showToast({
-            title: '设备繁忙',
+            title: "设备繁忙",
             duration: 2000,
-            icon: 'none'
-          });
+            icon: "none",
+          })
           this.conferenceInit()
           return
         } else {
           uni.request({
-            url: 'http://' + ip + '/test',
-            method: 'GET',
+            url: "http://" + ip + "/test",
+            method: "GET",
             sslVerify: false,
             success(res) {
-
               if (res.errMsg === "request:ok") {
                 uni.showToast({
-                  title: '连接正常', //提示文字
+                  title: "连接正常", //提示文字
                   duration: 2000, //显示时长
-                  icon: 'none'
+                  icon: "none",
                 })
                 return
               } else {
                 uni.showToast({
-                  title: '连接异常', //提示文字
+                  title: "连接异常", //提示文字
                   duration: 2000, //显示时长
-                  icon: 'none'
+                  icon: "none",
                 })
                 return
               }
             },
             fail: (res) => {
-
               uni.showToast({
-                title: '连接异常！',
+                title: "连接异常！",
                 duration: 2000,
-                icon: 'none'
-              });
+                icon: "none",
+              })
               return
             },
           })
         }
-      } catch (e) {
-
-      }
+      } catch (e) {}
     },
     async goto(ip, id) {
       //未开始会议，不允许对设备进行修改
       if (!this.nowRoomDataVO.flag) {
         uni.showToast({
-          title: '请先开始会议', //提示文字
+          title: "请先开始会议", //提示文字
           duration: 2000, //显示时长
-          icon: 'none'
+          icon: "none",
         })
         return
       }
       //如果设备未获取到IP信息
       if (!ip) {
         wx.showToast({
-          title: '暂无IP信息,等待连接！', //提示文字
+          title: "暂无IP信息,等待连接！", //提示文字
           duration: 2000, //显示时长
-          icon: 'none'
+          icon: "none",
         })
         return
       }
@@ -239,19 +267,19 @@ export default {
 
       if (res.data.data.equipmentStatus == 1) {
         uni.showToast({
-          title: '设备繁忙',
+          title: "设备繁忙",
           duration: 2000,
-          icon: 'none'
-        });
+          icon: "none",
+        })
         this.conferenceInit()
         return
       } else {
         uni.navigateTo({
-          url: '/pages/show/index?id=' + id
+          url: "/pages/show/index?id=" + id,
         })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -338,9 +366,7 @@ page {
   flex-flow: column;
   justify-content: start;
   align-items: center;
-
 }
-
 
 .card {
   box-sizing: border-box;
@@ -434,7 +460,6 @@ image {
 }
 
 .weui-input {
-
   font-size: 18px;
   width: 60%;
   text-align: start;
